@@ -49,6 +49,7 @@ export interface ImageItemMeta {
   size: number
   width: number
   height: number
+  previewUrl?: string
 }
 
 export type ItemStatus = 'queued'|'processing'|'done'|'error'|'canceled'
