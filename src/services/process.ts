@@ -40,10 +40,16 @@ function buildSettings(item: ImageItemState): ProcessSettings {
 }
 
 export async function processItem(item: ImageItemState) {
+  const id = item.meta.id
+  useAppStore.getState().requeueItem(id)
+  const state = useAppStore.getState()
+  if (!state.processingEnabled) {
+    return { id, cancel: () => {} }
+  }
   const p = ensurePool()
   const meta = buildMeta(item)
   const settings = buildSettings(item)
-  const { markProgress, markDone, markError, markCanceled } = useAppStore.getState()
+  const { markProgress, markDone, markError, markCanceled } = state
 
   const file = getSource(meta.id)
   if (!file) {
@@ -78,6 +84,7 @@ export function cancelItem(id: string) {
 
 export function processAllQueued() {
   const state = useAppStore.getState()
+  if (!state.processingEnabled) return
   const items = state.queue.filter((i) => i.status === 'queued')
   for (const it of items) {
     void processItem(it)

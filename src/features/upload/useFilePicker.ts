@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 import { useAppStore } from '../../state/store'
 import type { ImageItemMeta } from '../../state/types'
-import { getImageDimensions, isSupportedType } from '../../utils/imageMeta'
+import { extractImageMeta, isSupportedType } from '../../utils/imageMeta'
 import { addSources } from '@/services/source'
 import { processAllQueued } from '@/services/process'
 
@@ -23,9 +23,9 @@ export function useFilePicker(opts: PickerOptions = {}) {
       const f = limited[i]
       if (!isSupportedType(f.type)) continue
       try {
-        const { width, height } = await getImageDimensions(f)
+        const { width, height, previewUrl } = await extractImageMeta(f, { maxEdge: 160 })
         const id = `${Date.now()}_${i}_${f.name}`
-        metas.push({ id, name: f.name, type: f.type, size: f.size, width, height })
+        metas.push({ id, name: f.name, type: f.type, size: f.size, width, height, previewUrl })
         sources.push({ id, file: f })
       } catch {
         // ignore decode errors; could add a toast in UI

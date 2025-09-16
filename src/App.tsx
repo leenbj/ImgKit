@@ -1,12 +1,16 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect } from 'react'
 import AppShell from './app/AppShell'
 import UploadZone from './features/upload/UploadZone'
 import FileList from './features/list/FileList'
 import { initSettingsPersistence } from './services/persist'
+import { useAppStore } from './state/store'
+import { processAllQueued } from './services/process'
 
 export default function App() {
-  const [intensity, setIntensity] = useState(60)
-  const est = useMemo(() => ({ beforeKB: 1024, afterKB: Math.round(1024 * (0.4 + (100 - intensity) / 100 * 0.6)) }), [intensity])
+  const intensity = useAppStore((s) => s.settings.encode.intensity)
+  const setIntensity = useAppStore((s) => s.setIntensity)
+  const processingEnabled = useAppStore((s) => s.processingEnabled)
+  const toggleProcessing = useAppStore((s) => s.toggleProcessing)
 
   const headerRight = (
     <div className="flex items-center gap-3">
@@ -20,7 +24,18 @@ export default function App() {
         value={intensity}
         onChange={(e) => setIntensity(Number(e.target.value))}
       />
-      <button className="btn">开始压缩</button>
+      <button
+        className="btn"
+        onClick={() => {
+          const next = !processingEnabled
+          toggleProcessing()
+          if (next) {
+            try { processAllQueued() } catch {}
+          }
+        }}
+      >
+        {processingEnabled ? '暂停压缩' : '开始压缩'}
+      </button>
     </div>
   )
 
