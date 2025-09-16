@@ -1,6 +1,8 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import AppShell from './app/AppShell'
 import UploadZone from './features/upload/UploadZone'
+import FileList from './features/list/FileList'
+import { initSettingsPersistence } from './services/persist'
 
 export default function App() {
   const [intensity, setIntensity] = useState(60)
@@ -24,13 +26,18 @@ export default function App() {
 
   return (
     <AppShell headerRight={headerRight} footer={<span>© {new Date().getFullYear()} Image Compressor</span>}>
+      <InitOnce />
       <div className="space-y-6">
         <UploadZone />
-        <div className="card p-6">
-          <p className="text-sm opacity-80">示例占位：列表、并发压缩与下载将在后续任务实现。</p>
-          <div className="mt-4 text-sm">压缩前：{est.beforeKB} KB ｜ 预计压缩后：{est.afterKB} KB</div>
-        </div>
+        <FileList />
       </div>
     </AppShell>
   )
+}
+
+function InitOnce() {
+  useEffect(() => {
+    initSettingsPersistence()
+  }, [])
+  return null
 }

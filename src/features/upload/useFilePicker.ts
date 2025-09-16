@@ -2,6 +2,8 @@ import { useCallback } from 'react'
 import { useAppStore } from '../../state/store'
 import type { ImageItemMeta } from '../../state/types'
 import { getImageDimensions, isSupportedType } from '../../utils/imageMeta'
+import { addSources } from '@/services/source'
+import { processAllQueued } from '@/services/process'
 
 export interface PickerOptions {
   maxFiles?: number
@@ -16,6 +18,7 @@ export function useFilePicker(opts: PickerOptions = {}) {
     const limited = list.slice(0, maxFiles)
 
     const metas: ImageItemMeta[] = []
+    const sources: Array<{ id: string; file: File }> = []
     for (let i = 0; i < limited.length; i++) {
       const f = limited[i]
       if (!isSupportedType(f.type)) continue
@@ -23,11 +26,16 @@ export function useFilePicker(opts: PickerOptions = {}) {
         const { width, height } = await getImageDimensions(f)
         const id = `${Date.now()}_${i}_${f.name}`
         metas.push({ id, name: f.name, type: f.type, size: f.size, width, height })
+        sources.push({ id, file: f })
       } catch {
         // ignore decode errors; could add a toast in UI
       }
     }
-    if (metas.length) addFiles(metas)
+    if (metas.length) {
+      addFiles(metas)
+      addSources(sources)
+      try { processAllQueued() } catch {}
+    }
   }, [addFiles, maxFiles])
 
   const onInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,4 +56,3 @@ export function useFilePicker(opts: PickerOptions = {}) {
 
   return { onInputChange, onDrop, onDragOver, handleFiles }
 }
-

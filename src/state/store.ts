@@ -30,6 +30,15 @@ export interface AppState {
   markProgress: (id: string, progress: number) => void
   markEstimate: (id: string, outSize?: number, ratio?: number) => void
   markDone: (id: string, result: NonNullable<ImageItemState['result']>) => void
+  markError: (id: string, message: string) => void
+  setItemOverride: (
+    id: string,
+    patch: Partial<NonNullable<ImageItemState['override']>>,
+  ) => void
+  markCanceled: (id: string) => void
+  toggleSelect: (id: string) => void
+  selectAll: () => void
+  clearSelection: () => void
 }
 
 export const useAppStore = create<AppState>((set, get) => ({
@@ -62,5 +71,34 @@ export const useAppStore = create<AppState>((set, get) => ({
   markDone: (id, result) => set((s) => ({
     queue: s.queue.map((i) => (i.meta.id === id ? { ...i, result, status: 'done', progress: 100 } : i)),
   })),
-}))
 
+  markError: (id, message) => set((s) => ({
+    queue: s.queue.map((i) => (i.meta.id === id ? { ...i, status: 'error', error: message } : i)),
+  })),
+
+  setItemOverride: (id, patch) => set((s) => ({
+    queue: s.queue.map((i) => {
+      if (i.meta.id !== id) return i
+      const nextOverride = {
+        encode: { ...i.override?.encode, ...patch.encode },
+        size: { ...i.override?.size, ...patch.size },
+        crop: { ...i.override?.crop, ...patch.crop },
+        watermark: { ...i.override?.watermark, ...patch.watermark },
+      }
+      return { ...i, override: nextOverride }
+    }),
+  })),
+
+  markCanceled: (id) => set((s) => ({
+    queue: s.queue.map((i) => (i.meta.id === id ? { ...i, status: 'canceled' } : i)),
+  })),
+
+  toggleSelect: (id) => set((s) => {
+    const next = new Set(s.selectedIds)
+    if (next.has(id)) next.delete(id)
+    else next.add(id)
+    return { selectedIds: next }
+  }),
+  selectAll: () => set((s) => ({ selectedIds: new Set(s.queue.map((i) => i.meta.id)) })),
+  clearSelection: () => set({ selectedIds: new Set() }),
+}))
