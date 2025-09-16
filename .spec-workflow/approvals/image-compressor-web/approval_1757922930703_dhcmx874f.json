@@ -1,0 +1,21 @@
+{
+  "id": "approval_1757922930703_dhcmx874f",
+  "title": "需求规范：image-compressor-web（Requirements）",
+  "filePath": ".spec-workflow/specs/image-compressor-web/requirements.md",
+  "type": "document",
+  "status": "needs-revision",
+  "createdAt": "2025-09-15T07:55:30.703Z",
+  "category": "spec",
+  "categoryName": "image-compressor-web",
+  "response": "Feedback Summary (1 comments):\n\nGeneral Comments:\n1. 增加可以调整图片尺寸和比例的功能，能够自由的选择具体的图片尺寸或者比例，要求原图片不要变形，可以手动选择展示图片的位置\n\n",
+  "annotations": "{\n  \"decision\": \"needs-revision\",\n  \"comments\": [\n    {\n      \"type\": \"general\",\n      \"comment\": \"增加可以调整图片尺寸和比例的功能，能够自由的选择具体的图片尺寸或者比例，要求原图片不要变形，可以手动选择展示图片的位置\",\n      \"timestamp\": \"2025-09-15T08:00:47.371Z\",\n      \"id\": \"comment_1757923247371_63m4kthho\"\n    }\n  ],\n  \"summary\": \"Feedback Summary (1 comments):\\n\\nGeneral Comments:\\n1. 增加可以调整图片尺寸和比例的功能，能够自由的选择具体的图片尺寸或者比例，要求原图片不要变形，可以手动选择展示图片的位置\\n\\n\",\n  \"timestamp\": \"2025-09-15T08:00:56.085Z\"\n}",
+  "respondedAt": "2025-09-15T08:00:56.103Z",
+  "comments": [
+    {
+      "type": "general",
+      "comment": "增加可以调整图片尺寸和比例的功能，能够自由的选择具体的图片尺寸或者比例，要求原图片不要变形，可以手动选择展示图片的位置",
+      "timestamp": "2025-09-15T08:00:47.371Z",
+      "id": "comment_1757923247371_63m4kthho"
+    }
+  ]
+}

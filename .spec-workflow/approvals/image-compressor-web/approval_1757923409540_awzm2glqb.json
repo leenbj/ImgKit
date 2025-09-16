@@ -1,0 +1,33 @@
+{
+  "id": "approval_1757923409540_awzm2glqb",
+  "title": "更新版需求规范：image-compressor-web（加入尺寸/比例与裁剪）",
+  "filePath": ".spec-workflow/specs/image-compressor-web/requirements.md",
+  "type": "document",
+  "status": "needs-revision",
+  "createdAt": "2025-09-15T08:03:29.540Z",
+  "category": "spec",
+  "categoryName": "image-compressor-web",
+  "response": "Feedback Summary (2 comments):\n\nGeneral Comments:\n1. 增加添加水印的功能，用户可以上传透明底的png图片做为水印，也可以手动添加文字内容做为水印，水印图标要求斜着排放，水印要若隐约现不要影响原有图片的展示效果\n\nSpecific Text Comments:\n1. \"控制压缩比例（百分比形式）\": 通过滑动滑块的方式控制压缩比例，并且能够显示出来压缩前后的图片大小\n",
+  "annotations": "{\n  \"decision\": \"needs-revision\",\n  \"comments\": [\n    {\n      \"type\": \"selection\",\n      \"comment\": \"通过滑动滑块的方式控制压缩比例，并且能够显示出来压缩前后的图片大小\",\n      \"timestamp\": \"2025-09-15T08:05:36.662Z\",\n      \"selectedText\": \"控制压缩比例（百分比形式）\",\n      \"highlightColor\": {\n        \"bg\": \"rgba(255, 235, 59, 0.3)\",\n        \"border\": \"#FFEB3B\",\n        \"name\": \"#ffeb3b\"\n      },\n      \"id\": \"comment_1757923536662_o06p1pnp2\"\n    },\n    {\n      \"type\": \"general\",\n      \"comment\": \"增加添加水印的功能，用户可以上传透明底的png图片做为水印，也可以手动添加文字内容做为水印，水印图标要求斜着排放，水印要若隐约现不要影响原有图片的展示效果\",\n      \"timestamp\": \"2025-09-15T08:07:26.764Z\",\n      \"id\": \"comment_1757923646764_4mp5cxyyu\"\n    }\n  ],\n  \"summary\": \"Feedback Summary (2 comments):\\n\\nGeneral Comments:\\n1. 增加添加水印的功能，用户可以上传透明底的png图片做为水印，也可以手动添加文字内容做为水印，水印图标要求斜着排放，水印要若隐约现不要影响原有图片的展示效果\\n\\nSpecific Text Comments:\\n1. \\\"控制压缩比例（百分比形式）\\\": 通过滑动滑块的方式控制压缩比例，并且能够显示出来压缩前后的图片大小\\n\",\n  \"timestamp\": \"2025-09-15T08:09:04.684Z\"\n}",
+  "respondedAt": "2025-09-15T08:09:04.698Z",
+  "comments": [
+    {
+      "type": "selection",
+      "comment": "通过滑动滑块的方式控制压缩比例，并且能够显示出来压缩前后的图片大小",
+      "timestamp": "2025-09-15T08:05:36.662Z",
+      "selectedText": "控制压缩比例（百分比形式）",
+      "highlightColor": {
+        "bg": "rgba(255, 235, 59, 0.3)",
+        "border": "#FFEB3B",
+        "name": "#ffeb3b"
+      },
+      "id": "comment_1757923536662_o06p1pnp2"
+    },
+    {
+      "type": "general",
+      "comment": "增加添加水印的功能，用户可以上传透明底的png图片做为水印，也可以手动添加文字内容做为水印，水印图标要求斜着排放，水印要若隐约现不要影响原有图片的展示效果",
+      "timestamp": "2025-09-15T08:07:26.764Z",
+      "id": "comment_1757923646764_4mp5cxyyu"
+    }
+  ]
+}
